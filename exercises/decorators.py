@@ -10,14 +10,46 @@ import time
 # Exercise 1
 # Step 1: write a function called "print_message" 
 # that prints the phrase "Python is awesome!"
+
+def print_message():
+    '''
+    step 1 print phrase
+    :return: string
+    '''
+    print "Python is awesome"
+
 #
 # Step 2: Write a decorator called "spam" that prints
 # the phrase "Ministry of Silly Walks" before the wrapped 
 # function is called, prints "Python is awesome!" when 
 # the function you wrote in Step 1 is 
-# called, and "Pining for the fjords" after this. 
+# called, and "Pining for the fjords" after this.
+
+def spam(my_func):
+    '''
+    decorator function
+    :param my_func: inner function
+    :return:
+    '''
+    def inner_func(*args, **kwargs):
+        print "Ministry of Silly Walks"
+        result = my_func(*args,**kwargs)
+        print "Pining for the fjords"
+        return result
+    return inner_func
+
 #
 # Step 3: apply your decorator to print_message()
+
+@spam
+def print_message():
+    '''
+    step 1 print phrase
+    :return: string
+    '''
+    print "Python is awesome"
+
+
 #
 # Output will look like the following 3 lines:
 # Ministry of Silly Walks
@@ -37,6 +69,20 @@ print "--------------------------"  # separate exercise output
 # Write a decorator that returns the product of two numbers.
 # Step 1: write a function that returns the product of two numbers.
 # Step 2: write a decorator that prints a message before and after
+def bf_af(my_func):
+    def inner_func(*args,**kwargs):
+        print "before"
+        result = my_func(*args,**kwargs)
+        print "after"
+        return result
+    return inner_func
+
+
+@bf_af
+def product(n1,n2):
+    return n1*n2
+
+
 # your function is executed.
 # ================================
 print "Exercise 2 output:"
